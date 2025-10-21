@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: helm-proj
+  namespace: default
+spec:
+  destination:
+    namespace: default  # You can change this to the desired target namespace
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://github.com/qasimsqt/helm-proj.git
+    targetRevision: main
+    path: dir  # Path to the folder that contains deploy.yaml and service.yaml
+  project: default
+  syncPolicy:
+    automated:
+      prune: true  # Optionally, enable automatic pruning to remove resources no longer defined
+      selfHeal: true  # Optionally, enable self-healing to auto-sync if drift is detected
+
