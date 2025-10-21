@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "proj-hello-world-test-connection"
+  labels:
+    helm.sh/chart: hello-world-0.1.0
+    app.kubernetes.io/name: hello-world
+    app.kubernetes.io/instance: proj
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['proj-hello-world:80']
+  restartPolicy: Never
+
