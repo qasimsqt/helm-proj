@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx 
+  namespace: default
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/qasimsqt/helm-proj.git
+    targetRevision: main
+    path: .
+    helm:
+      releaseName: nginx
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+
